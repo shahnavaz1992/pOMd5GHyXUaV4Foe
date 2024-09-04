@@ -1,0 +1,14 @@
+matplotlib.pyplot 
+pandas 
+numpy 
+nltk
+re
+string
+collections
+sklearn
+gensim
+fasttext.util
+csv
+sentence_transformers
+torch
+os
