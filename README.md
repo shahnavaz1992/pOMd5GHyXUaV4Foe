@@ -38,16 +38,9 @@ As you can see, the data contains symbols, duplicates and acronyms. We need to p
 
 ![image](https://github.com/kuzhuppillil/hRxAyOCqFYmEZwY5/assets/25860818/9c4f639e-8467-4477-a24d-d11be716236c)
 
-The plot below illustrates the word frequency, presented in the sorted list below, allowing for a better understanding.
-
-![temp1](https://github.com/kuzhuppillil/hRxAyOCqFYmEZwY5/assets/25860818/6cdad5e3-b36d-4b77-86a9-e5f678a9c2c5)
-
 We are seeking candidates who show interest in human resources, which can be identified through the presence of keywords such as **"Aspiring human resources" or "Seeking human resources"**. Therefore, we will use either of these phrases as our search keyword.
 
 ## Word Embedding Techniques Implemented and Their Effectiveness:
-
-### Bag-of-Words Models:
-* Matched based on word combinations but struggled to capture semantic meaning.
 
 ### TF-IDF Weighted Keywords:
 * Despite using TF-IDF weighted keywords, it missed identifying some key terms, especially the most frequent search keywords. Due to its reliance on rare words, while capturing word importance, it proved ineffective for our specific objective.
@@ -62,38 +55,27 @@ We are seeking candidates who show interest in human resources, which can be ide
 
   ![image](https://github.com/kuzhuppillil/hRxAyOCqFYmEZwY5/assets/25860818/73900b4e-c65f-40fa-8b12-a0e75851767a)
 
-To optimize the fitness score, we can combined all the individual fit scores through **feature engineering** for a comprehensive evaluation of candidate suitability. We can also employe a **weighted sum** approach to create a **final fit score**, considering the significance of each candidate's connections.
 
 ## Ranking candidates:
-* We incorporated a weighted fit score, utilizing the scaled connection count along with text relevance from multiple fit scores. Given the crucial role of connections in recruitment positions, this approach assigns significant importance to connection count in HR job roles. The weighted combination of fitness scores and scaled connection count aims to strike a balance between the influence of connections and title semantics.
-* To enhance the effectiveness of the ranking solution, a cut-off threshold has been implemented to eliminate non-relevant candidates. The current threshold has been fine-tuned to align with the characteristics of the current dataset. It ensures a fair trade-off between title semantics and the networking skills of candidates.
-
- ![image](https://github.com/kuzhuppillil/hRxAyOCqFYmEZwY5/assets/25860818/503dd042-cf4f-4b34-a964-973a211647b6)
+*  we can see clearly that Bert is the best model till now. And this is not arbitrary, as Bert is pretrained on a large corpus of unlabelled text including the entire Wikipedia(that’s 2,500 million words!) and Book Corpus (800 million words). Indeed, pre-training step is half the magic behind BERT’s success.
 
 ## Reranking candidates:
 * Finally reranking by starring ideal candidates helps surface other potentials similar to that profile, this refines the ranking further using the starred candiate attributes as a baseline.
-* Encoded additional attributes like location and fitscore to better match candidates.
 
 ![image](https://github.com/kuzhuppillil/hRxAyOCqFYmEZwY5/assets/25860818/9ef9db4b-3367-47a7-98a2-ed54667886cb)
 
+* As the Bert model was the best, so we will use it for this step. In this step, we will use the learning to rank (LTR) technique, a machine learning sub-field applicable to a variety of real-world problems that are related to ranking prediction or candidate recommendation. There are 3 main known models: RankNet, LambdaRank and LmabdaMart. In our wase, we will try to use the RankNet model first and then LamdaRank.
 
-## BONUS : Rank prediction using SVM Ranker:
+## USE Large Language Model:
 
-* Applied SVM ranker to reranked data to reduce potential human bias in ranking. Model evaluation showed low MSE, indicating good predictive ability considering the limited dataset.
+* Lasr part uses the necessary libraries and sets up OpenAI's GPT-3.5 for ranking employee job titles based on relevance to a specific keyword. A PromptTemplate is used to create a structured prompt asking the GPT-3.5 model to rank employees by their job titles and relevance to the provided keyword. The llm object sends the formatted prompt to the GPT-3.5 model, which generates the ranking result. You can replace "Your_OpenAI_Key" with your actual OpenAI API key to run this code with GPT-3.5.
+* Hugging Face’s GPT-2 model was employed to rank employee job titles based on relevance to a specific keyword. It defines a prompt template that takes a list of employee job titles and a keyword, formats it, and generates a ranking using the Hugging Face pipeline for text generation. The model is explicitly set to truncate the input and pad appropriately. The dataframe data is used to extract the top 12 job titles for the ranking task.
 
- ![Untitled](https://github.com/kuzhuppillil/hRxAyOCqFYmEZwY5/assets/25860818/9eb45558-9d95-4b6f-bc98-ee60665b3b09)
+## Conclusion:
+
+* From the steps that I followed in this project, I can infer that BERT model was the best to find the similarity between our data and the targeted keyword/phrase. As for the second part of Re-Ranking, I run the based model of LTR techniques which is the RankNet model. The best model was with the optimizer SGD and a learning rate equal to 0.2. Thus, gives a loss score of 0.44%.
 
 
-## Final Observation:
-
-This solution not only predicts candidate fitness but also adapts to changes, promoting fairness and efficiency in the selection process.
-
-* Leveraging various encoders, we effectively capture relevant semantics from job titles.
-* Through feature engineering, the fitness score of candidates is refined by incorporating a weighted combination of semantics from titles and scaled communication (representing networking skills), ensuring a fair ranking system.
-* The implemented threshold guarantees the retention of only relevant candidates, allowing the algorithm to further refine the ranking effectively.
-* Continuous refinement of the ranking occurs with every starring action, making the search baseline more relevant with each human input. Advanced NLP embedding techniques aid in surfacing similar candidates, ensuring fairness without bias, and the SVM ranker with a linear kernel reinforces this process.
-* To enhance the solution's performance, fine-tuning the weighted sum of the feature-engineered fit score and adjusting the cutoff threshold is recommended. This refinement process can be further improved by accessing additional candidate data.
-* In a broader context, the solution is adaptable to other job roles by modifying keywords and making minor adjustments in text preprocessing. It's crucial to note that the current feature-engineered score and cutoff are customized for the HR role.
 
 
 
