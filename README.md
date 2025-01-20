@@ -68,8 +68,8 @@ We are seeking candidates who show interest in human resources, which can be ide
 
 ## USE Large Language Model:
 
-* Lasr part uses the necessary libraries and sets up OpenAI's GPT-3.5 for ranking employee job titles based on relevance to a specific keyword. A PromptTemplate is used to create a structured prompt asking the GPT-3.5 model to rank employees by their job titles and relevance to the provided keyword. The llm object sends the formatted prompt to the GPT-3.5 model, which generates the ranking result. You can replace "Your_OpenAI_Key" with your actual OpenAI API key to run this code with GPT-3.5.
-* Hugging Face’s GPT-2 model was employed to rank employee job titles based on relevance to a specific keyword. It defines a prompt template that takes a list of employee job titles and a keyword, formats it, and generates a ranking using the Hugging Face pipeline for text generation. The model is explicitly set to truncate the input and pad appropriately. The dataframe data is used to extract the top 12 job titles for the ranking task.
+* Last part uses the necessary libraries and sets up OpenAI's GPT-3.5 for ranking employee job titles based on relevance to a specific keyword. A PromptTemplate is used to create a structured prompt asking the GPT-3.5 model to rank employees by their job titles and relevance to the provided keyword. The llm object sends the formatted prompt to the GPT-3.5 model, which generates the ranking result. You can replace "Your_OpenAI_Key" with your actual OpenAI API key to run this code with GPT-3.5.
+* Hugging Face’s Mixtral model was employed to rank employee job titles based on relevance to a specific keyword. It defines a prompt template that takes a list of employee job titles and a keyword, formats it, and generates a ranking using the Hugging Face pipeline for text generation. The model is explicitly set to truncate the input and pad appropriately. The dataframe data is used to extract the top 12 job titles for the ranking task.
 
 ## Conclusion:
 
